@@ -1,0 +1,161 @@
+<!Doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300&display=swap" rel="stylesheet">
+
+
+        <!-- style -->
+        <style type="text/css">
+            html {
+                box-sizing: border-box;
+                font-size: 62.5%;
+            }
+
+            html *,
+            html *:before,
+            html *:after {
+                box-sizing: inherit;
+            }
+
+            body {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100vw;
+                height: 100vh;
+                background-color: #98DFFD;
+            }
+
+            ul {
+                padding: 0;
+                list-style: none;
+            }
+
+            li {
+                font-size: medium;
+            }
+
+            .dropdown {
+                width: 100%;
+                margin: 0 20px;
+                padding: 20px;
+                background-color: white;
+                box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.3);
+                font-family: 'Lato', sans-serif;
+            }
+
+            @media (min-width: 768px) {
+                .dropdown {
+                    width: 600px;
+                }
+            }
+
+            .title-box {
+                text-align: center;
+            }
+
+            input {
+
+                padding: 20px;
+                color: lightgray;
+                background-color: #fff;
+                border: 1px solid #d6d6d6;
+                border-radius: 30px;
+                font-size: 14px;
+                text-transform: uppercase;
+                transition: .3s;
+                width: 500px;
+            }
+
+            .search {
+                display: flex;
+            }
+
+            button {
+                margin-left: 10px;
+                width: 70px;
+                height: 30px;
+                border-radius: 30px;
+                border-color: transparent;
+                background-color: transparent;
+                font-size: medium;
+                margin-top: 12px;
+                color: gray;
+            }
+
+            h3 {
+                font-weight: lighter;
+            }
+
+            .all-box {
+                margin: 200px 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="all-box">
+            <div class="title-box">
+                <h1 class="display-4">관심있는 키워드를 검색해보세요, 관련주를 알려드려요</h1>
+                <h3 class="display-5">ex. 마스크, 강아지, 폭우 등등</h3>
+            </div>
+
+            <div class="dropdown">
+                <div class="search">
+                    <input type="text" placeholder="검색어를 입력해주세요.">
+                    <button>검색</button>
+                </div>
+            </div>
+            <div class="list-box">
+                <ul class="list-group">
+                    <li class="list-group-item">1 키워드</li>
+                    <li class="list-group-item">2 키워드</li>
+                    <li class="list-group-item">3 키워드</li>
+                    <li class="list-group-item">4 키워드</li>
+                    <li class="list-group-item">6 키워드</li>
+                    <li class="list-group-item">7 키워드</li>
+                    <li class="list-group-item">8 키워드</li>
+                    <li class="list-group-item">9 키워드</li>
+                    <li class="list-group-item">10 키워드</li>
+
+                </ul>
+            </div>
+
+        </div>
+        <script>
+            // Change option selected
+            const label = document.querySelector('.dropdown__filter-selected');
+            const options = Array.from(document.querySelectorAll('.dropdown__select-option'));
+
+            options.forEach(option => {
+                option.addEventListener('click', () => {
+                    label.textContent = option.textContent;
+                });
+            });
+
+            // Close dropdown onclick outside
+            document.addEventListener('click', e => {
+                const toggle = document.querySelector('.dropdown__switch');
+                const element = e.target;
+
+                if (element == toggle) return;
+
+                const isDropdownChild = element.closest('.dropdown__filter');
+
+                if (!isDropdownChild) {
+                    toggle.checked = false;
+                }
+            });
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
