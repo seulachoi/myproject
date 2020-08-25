@@ -170,6 +170,18 @@
     matched_receive = request.args.get('title')
     ```
     
- 
+## ajax POST 매칭된 주식 종목리스트를 클릭 시 -> 해당 종목 상세 페이지로 넘어가기 
+  - 주식 종목 이름을 클릭 시, 해당 종목 상세페이지html로 이동
+  ###클라이언트
+    1) html에서 a tag로 `<a href="/stocksinfo?title={{i}}">` 로 링크를 걸어주기! `href`뒤에 /stocksinfo 로 url을 넣어주고, **변수 `title`에 들어가야 할 종목 이름을 넣어주기**
+    **이때는 get 요청에 해당함**
+  ###Backend
+    1) 서버에서 /stocksinfo url로 요청에 대한 api 구성
+    2) get요청이니까 `requests.args.get()`로 변수를 받아줌 (post 요청일 때는 `requests.form[]` get일때는 ()이구 post 요청일때는 [])
+    ```
+    @app.route('/stocksinfo', methods=['GET'])
+    def stocks_info():
+    matched_receive = request.args.get('title')
+    ```
   
   
