@@ -23,4 +23,11 @@
 .list-group {
     width: 100%;
     text-align: left;
-}```
+}
+```
+
+## CSS border 
+css border link [https://www.w3schools.com/css/css_border.asp]
+`border: outset;`
+can give css charateristic on childeren by selecting clss `.date-item` of children, even if parent's CSS is adjusted 
+children CSS has higher hierachy! 
