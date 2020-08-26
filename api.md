@@ -170,18 +170,54 @@
     matched_receive = request.args.get('title')
     ```
     
-## ajax POST 매칭된 주식 종목리스트를 클릭 시 -> 해당 종목 상세 페이지로 넘어가기 
-  - 주식 종목 이름을 클릭 시, 해당 종목 상세페이지html로 이동
-  ###클라이언트
-    1) html에서 a tag로 `<a href="/stocksinfo?title={{i}}">` 로 링크를 걸어주기! `href`뒤에 /stocksinfo 로 url을 넣어주고, **변수 `title`에 들어가야 할 종목 이름을 넣어주기**
-    **이때는 get 요청에 해당함**
-  ###Backend
-    1) 서버에서 /stocksinfo url로 요청에 대한 api 구성
-    2) get요청이니까 `requests.args.get()`로 변수를 받아줌 (post 요청일 때는 `requests.form[]` get일때는 ()이구 post 요청일때는 [])
-    ```
-    @app.route('/stocksinfo', methods=['GET'])
-    def stocks_info():
-    matched_receive = request.args.get('title')
+## ajax POST 매칭된 결과를 json data로 클라이언트로 넘겨주고 -> 클라이언트에서 변수 받아서 html 그리기
+  ###Backend : jsonify로 데이터 넘길때에는 jsonify( { ' ' : 변수} )
+    1) 서버에서 /keywords, POST 요청에 대한 api 구성: 클라이언트 요청이 `form action`을 통한 요청이 아닐 경우, 즉 **ajax 요청에는 json으로 답하자!** 
+    **참고 `<form action="/stocksinfo?title={{i}}" method="GET">` FORM을 통한 요청은 GET요청에 해당함!**
+   ```
+   return jsonify({'result':'success', 'data':matched_list, 'keyword_search':keyword_receive})
+   ```
+   ###클라이언트: 서버에서 받은 결과를 새로운 HTML페이지에 그려줘야함 
+   1) 서버는 jsonify로 넘겨줬으니까, 데이터를 인식할 때 이니까 `response['data']`, `response['data'][0]` 로 리스트 형식을 반영해서 변수를 들여와야함
+   2) for 문을 통해 html 요소를 그려주기: 아래 형식으로 appendTo 선택한 요소 끝부분에 $()의 html에 변수를 넣어서 추가할 수 있음
+   `$('html요소나 id 이름').html(변수).appendTo("요소나 id 이름")`
+   
+   ```
+   for (let i = 0; i < data.length; i++) {
+                                    makeLink(data[i])
+                                    // $("<button name=\"matched_give\" id=\"matchedGive\" class=\"matchedStock\">").html(data[i]).appendTo("form");
+                                }
+   ```
+   
+   
+   
+   ```
+$.ajax({
+                        type: 'POST',
+                        url: '/keywords',
+                        data: {keyword_give: params.q},
+                        success: function (response) {
+                            // 3. 응답이 오면 로딩 인디케이터를 다시 안보이도록 처리하고, 전달받은 JSON 데이터로 화면에 결과를 그려준다.
+                            if (response['result'] == 'success') {
+                                $('#title-box').css('display', 'block');
+                                $('#loading-container').css('display', 'none');
+                                $('#re-result-box').css('display', 'block');
+
+                                let data = response['data']
+                                let keyword_search = response['keyword_search']
+                                var decodeName = decodeURI(decodeURIComponent(keyword_search));
+                                console.log(decodeName)
+
+
+                                $("#title-box").html(decodeName + " 관련주")
+
+                                for (let i = 0; i < data.length; i++) {
+                                    makeLink(data[i])
+                                    // $("<button name=\"matched_give\" id=\"matchedGive\" class=\"matchedStock\">").html(data[i]).appendTo("form");
+                                }
+                            }
+                        },
+                    });
     ```
   
   
