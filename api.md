@@ -180,7 +180,7 @@
    ###클라이언트: 서버에서 받은 결과를 새로운 HTML페이지에 그려줘야함 
    1) 서버는 jsonify로 넘겨줬으니까, 데이터를 인식할 때 이니까 `response['data']`, `response['data'][0]` 로 리스트 형식을 반영해서 변수를 들여와야함
    2) for 문을 통해 html 요소를 그려주기: 아래 형식으로 appendTo 선택한 요소 끝부분에 $()의 html에 변수를 넣어서 추가할 수 있음
-   `$('html요소나 id 이름').html(변수).appendTo("요소나 id 이름")`
+   `$('html요소나 id 이름').html(변수).appendTo("요소나 .클래스 이름")` `appendTo(".report-box")` `appendTo("form")`
    
    ```
    for (let i = 0; i < data.length; i++) {
