@@ -45,5 +45,6 @@ selenium.common.exceptions.WebDriverException: Message: chrome not reachable
 211.200.56.44 - - [31/Aug/2020 05:57:08] "GET /stocksinfo?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
 ```
 
-
+- 시도 : 혹시 네이버 접근에 문제가 있는 것인가 싶어서, 한경 -> 네이버 -> 유튜브 순의 셀레니움에서 한경 `driver.quit()` `time.sleep(2)` -> 네이버 `driver.quit()` `time.sleep(2)` -> 유튜브 `driver.quit()`을 넣어줌
+--결과 : **여러번 동작은 하지만, 몇번까지 되는지는 아직 실험중. 3-4번은 되는 것 같음**
   
