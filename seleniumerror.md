@@ -12,6 +12,9 @@ selenium.common.exceptions.SessionNotCreatedException: Message: session not crea
 `File "/home/ubuntu/my_projects/app.py", line 219, in stocks_info` 오류 발생 ㅠㅠ 
 
 ## 문제 : 3,4번째 부터 로딩 시간이 아주 오래걸리면서 `211.200.56.44 - - [31/Aug/2020 01:28:47] "POST /keywords HTTP/1.1" 500 -`, `selenium.common.exceptions.TimeoutException: Message: timeout: Timed out receiving message from renderer: 285.715 (Session info: headless chrome=85.0.4183.83)` 에러가 뜸 
+` File "/home/ubuntu/my_projects/app.py", line 135, in show_matched
+    driver.get(url)` 에서 오류 발생 
+
 ## 파이썬 셀레니움 옵션 부분 코드 
 ```
     chrome_options = Options()
