@@ -9,3 +9,11 @@ selenium.common.exceptions.SessionNotCreatedException: Message: session not crea
 -재시도 : 다시 추가한 옵션 없애줌   
 --재시도 결과 : `selenium.common.exceptions.WebDriverException: Message: unknown error: DevToolsActivePort file doesn't exist`
 `File "/home/ubuntu/my_projects/app.py", line 219, in stocks_info` 오류 발생 ㅠㅠ 
+
+## 파이썬 셀레니움 옵션 부분 코드 
+```
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+  
